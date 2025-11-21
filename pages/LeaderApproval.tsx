@@ -105,8 +105,8 @@ const LeaderApproval = () => {
                      <CheckCircle size={16} /> Duyệt
                    </Button>
                    <Button 
-                     variant="danger" 
-                     className="w-full md:w-32 bg-white text-red-600 border border-red-200 hover:bg-red-50 flex justify-center items-center gap-2"
+                     variant="secondary" 
+                     className="w-full md:w-32 bg-white text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 hover:border-red-300 flex justify-center items-center gap-2 transition-colors"
                      onClick={() => handleAction(item.id, 'REJECT')}
                    >
                      <XCircle size={16} /> Từ chối
