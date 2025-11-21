@@ -211,7 +211,7 @@ const Exceptions = () => {
                 rows={3} 
                 value={processNote}
                 onChange={(e) => setProcessNote(e.target.value)}
-                className="w-full border border-gray-300 bg-white rounded px-3 py-2 text-sm focus:ring-ceh-600 focus:border-ceh-600"
+                className="w-full border border-gray-300 bg-white text-gray-900 rounded px-3 py-2 text-sm focus:ring-ceh-600 focus:border-ceh-600"
                 placeholder="Nhập nội dung chi tiết, căn cứ xử lý..."
               ></textarea>
            </div>

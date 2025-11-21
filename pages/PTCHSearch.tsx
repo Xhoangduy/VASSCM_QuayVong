@@ -48,7 +48,7 @@ const PTCHSearch = () => {
               <input 
                 type="text" 
                 placeholder="Nhập số Container (VD: TCNU1234560)"
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:ring-2 focus:ring-ceh-400 focus:border-ceh-400 outline-none text-lg font-mono uppercase"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 bg-white text-gray-900 rounded-lg shadow-sm focus:ring-2 focus:ring-ceh-400 focus:border-ceh-400 outline-none text-lg font-mono uppercase"
                 value={searchId}
                 onChange={(e) => setSearchId(e.target.value)}
               />

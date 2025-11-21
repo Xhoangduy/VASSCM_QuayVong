@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { 
@@ -97,7 +98,7 @@ const Layout = () => {
                <input 
                  type="text" 
                  placeholder="Tìm kiếm tờ khai/container..." 
-                 className="pl-9 pr-4 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-ceh-400 w-64 transition-all"
+                 className="pl-9 pr-4 py-2 rounded-lg border border-gray-300 text-sm text-gray-900 bg-white focus:outline-none focus:border-ceh-400 w-64 transition-all"
                />
                <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
             </div>

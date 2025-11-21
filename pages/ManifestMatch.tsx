@@ -207,7 +207,7 @@ const ManifestMatch = () => {
            <div>
              <label className="block text-sm font-medium text-gray-700 mb-1">Loại bất thường</label>
              <select 
-               className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+               className="w-full border border-gray-300 bg-white text-gray-900 rounded px-3 py-2 text-sm"
                value={exceptionType}
                onChange={(e) => setExceptionType(e.target.value as ExceptionType)}
              >
@@ -220,7 +220,7 @@ const ManifestMatch = () => {
            <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Ghi chú / Lý do chi tiết</label>
               <textarea 
-                className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+                className="w-full border border-gray-300 bg-white text-gray-900 rounded px-3 py-2 text-sm"
                 rows={4}
                 placeholder="Mô tả chi tiết sai lệch..."
                 value={exceptionNote}

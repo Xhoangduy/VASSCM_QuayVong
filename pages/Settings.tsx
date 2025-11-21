@@ -21,7 +21,7 @@ const Settings = () => {
                <input 
                  type="number" 
                  defaultValue={90}
-                 className="w-full border border-gray-300 bg-white rounded px-3 py-2 text-sm focus:border-ceh-600"
+                 className="w-full border border-gray-300 bg-white text-gray-900 rounded px-3 py-2 text-sm focus:border-ceh-600"
                />
                <p className="text-xs text-gray-500 mt-1">Thời gian tối đa container được phép lưu tại VN trước khi phải tái xuất.</p>
             </div>
@@ -30,7 +30,7 @@ const Settings = () => {
                <input 
                  type="number" 
                  defaultValue={7}
-                 className="w-full border border-gray-300 bg-white rounded px-3 py-2 text-sm focus:border-ceh-600"
+                 className="w-full border border-gray-300 bg-white text-gray-900 rounded px-3 py-2 text-sm focus:border-ceh-600"
                />
             </div>
          </div>

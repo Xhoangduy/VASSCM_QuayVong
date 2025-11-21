@@ -13,13 +13,13 @@ const RegistrationCreate = () => {
   const [type, setType] = useState<RegistrationType>(RegistrationType.TNTX);
   const [submitterName, setSubmitterName] = useState('');
   const [containers, setContainers] = useState<Partial<Container>[]>([
-    { containerNumber: '', sizeType: '20DC', emptyFlag: true, notes: '' }
+    { containerNumber: '', sizeType: '20DC', emptyFlag: true, notes: '', billOfLading: '' }
   ]);
   const [errors, setErrors] = useState<string[]>([]);
 
   // Helper: Add Row
   const addContainerRow = () => {
-    setContainers([...containers, { containerNumber: '', sizeType: '20DC', emptyFlag: true, notes: '' }]);
+    setContainers([...containers, { containerNumber: '', sizeType: '20DC', emptyFlag: true, notes: '', billOfLading: '' }]);
   };
 
   // Helper: Remove Row
@@ -62,7 +62,7 @@ const RegistrationCreate = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 max-w-6xl mx-auto">
       <div className="flex items-center gap-4">
         <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-200 rounded-full text-gray-600">
           <ArrowLeft size={20} />
@@ -84,7 +84,7 @@ const RegistrationCreate = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Left: General Info */}
         <div className="md:col-span-1 space-y-6">
           <Card className="p-6">
@@ -96,7 +96,7 @@ const RegistrationCreate = () => {
                  <select 
                     value={type} 
                     onChange={(e) => setType(e.target.value as RegistrationType)}
-                    className="w-full border border-gray-300 bg-white rounded-md px-3 py-2 text-sm focus:border-ceh-600 focus:ring-1 focus:ring-ceh-600"
+                    className="w-full border border-gray-300 bg-white text-gray-900 rounded-md px-3 py-2 text-sm focus:border-ceh-600 focus:ring-1 focus:ring-ceh-600"
                  >
                    <option value={RegistrationType.TNTX}>Tạm Nhập - Tái Xuất (TNTX)</option>
                    <option value={RegistrationType.TXTN}>Tạm Xuất - Tái Nhập (TXTN)</option>
@@ -113,7 +113,7 @@ const RegistrationCreate = () => {
                    value={submitterName}
                    onChange={(e) => setSubmitterName(e.target.value)}
                    placeholder="VD: Hãng tàu Evergreen"
-                   className="w-full border border-gray-300 bg-white rounded-md px-3 py-2 text-sm focus:border-ceh-600 focus:ring-1 focus:ring-ceh-600"
+                   className="w-full border border-gray-300 bg-white text-gray-900 rounded-md px-3 py-2 text-sm focus:border-ceh-600 focus:ring-1 focus:ring-ceh-600"
                  />
                </div>
 
@@ -121,7 +121,7 @@ const RegistrationCreate = () => {
                  <label className="block text-sm font-medium text-gray-700 mb-1">Ghi chú chung</label>
                  <textarea 
                    rows={3}
-                   className="w-full border border-gray-300 bg-white rounded-md px-3 py-2 text-sm focus:border-ceh-600 focus:ring-1 focus:ring-ceh-600"
+                   className="w-full border border-gray-300 bg-white text-gray-900 rounded-md px-3 py-2 text-sm focus:border-ceh-600 focus:ring-1 focus:ring-ceh-600"
                  ></textarea>
                </div>
             </div>
@@ -129,7 +129,7 @@ const RegistrationCreate = () => {
         </div>
 
         {/* Right: Container List */}
-        <div className="md:col-span-2">
+        <div className="md:col-span-3">
            <Card className="h-full flex flex-col">
               <div className="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
                  <h3 className="font-bold text-gray-800">Danh sách Container ({containers.length})</h3>
@@ -143,9 +143,10 @@ const RegistrationCreate = () => {
                   <thead className="bg-white text-gray-500 border-b border-gray-200">
                     <tr>
                       <th className="px-4 py-2 w-10">#</th>
-                      <th className="px-4 py-2 w-40">Số Container <span className="text-red-500">*</span></th>
+                      <th className="px-4 py-2 w-36">Số Container <span className="text-red-500">*</span></th>
+                      <th className="px-4 py-2 w-32">Số Vận đơn</th>
                       <th className="px-4 py-2 w-24">Size/Type</th>
-                      <th className="px-4 py-2 w-24">Trạng thái</th>
+                      <th className="px-4 py-2 w-32">Trạng thái</th>
                       <th className="px-4 py-2">Ghi chú</th>
                       <th className="px-4 py-2 w-10"></th>
                     </tr>
@@ -161,7 +162,7 @@ const RegistrationCreate = () => {
                             onChange={(e) => updateContainer(idx, 'containerNumber', e.target.value.toUpperCase())}
                             placeholder="AAAA1234567"
                             maxLength={11}
-                            className={`w-full border rounded px-2 py-1 font-mono uppercase ${
+                            className={`w-full border rounded px-2 py-1 font-mono uppercase text-gray-900 ${
                               cont.containerNumber && !validateContainerCheckDigit(cont.containerNumber) 
                               ? 'border-red-500 focus:ring-red-200 bg-red-50' 
                               : 'border-gray-300 bg-white focus:border-ceh-600'
@@ -169,10 +170,19 @@ const RegistrationCreate = () => {
                           />
                         </td>
                         <td className="px-4 py-2">
+                          <input 
+                            type="text" 
+                            value={cont.billOfLading}
+                            onChange={(e) => updateContainer(idx, 'billOfLading', e.target.value)}
+                            placeholder="Số B/L"
+                            className="w-full border border-gray-300 bg-white text-gray-900 rounded px-2 py-1"
+                          />
+                        </td>
+                        <td className="px-4 py-2">
                            <select 
                              value={cont.sizeType}
                              onChange={(e) => updateContainer(idx, 'sizeType', e.target.value)}
-                             className="w-full border border-gray-300 bg-white rounded px-2 py-1"
+                             className="w-full border border-gray-300 bg-white text-gray-900 rounded px-2 py-1"
                            >
                              <option value="20DC">20DC</option>
                              <option value="40DC">40DC</option>
@@ -197,7 +207,7 @@ const RegistrationCreate = () => {
                             type="text" 
                             value={cont.notes}
                             onChange={(e) => updateContainer(idx, 'notes', e.target.value)}
-                            className="w-full border border-gray-300 bg-white rounded px-2 py-1"
+                            className="w-full border border-gray-300 bg-white text-gray-900 rounded px-2 py-1"
                           />
                         </td>
                         <td className="px-4 py-2 text-center">

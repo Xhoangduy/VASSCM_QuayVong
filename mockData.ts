@@ -1,5 +1,5 @@
 
-import { ContainerRegistration, RegistrationStatus, RegistrationType, GetInOutStatus, ManifestRecord, ExceptionTicket, ExceptionType, PTCHHistory } from './types';
+import { ContainerRegistration, RegistrationStatus, RegistrationType, GetInOutStatus, ManifestRecord, ExceptionTicket, ExceptionType, PTCHHistory, RequestType, RequestStatus } from './types';
 
 export const MOCK_REGISTRATIONS: ContainerRegistration[] = [
   {
@@ -8,8 +8,8 @@ export const MOCK_REGISTRATIONS: ContainerRegistration[] = [
     submitter: { name: "Evergreen Marine Corp", role: "Hãng tàu" },
     registrationType: RegistrationType.TNTX,
     containers: [
-      { containerNumber: "EGHU1234567", checkDigitValid: true, emptyFlag: true, getInOutStatus: GetInOutStatus.GETIN, sizeType: "40HC", manifestRef: "MNF-001" },
-      { containerNumber: "EGHU8888888", checkDigitValid: false, emptyFlag: true, getInOutStatus: GetInOutStatus.GETIN, sizeType: "20DC", notes: "Sai check digit" }
+      { containerNumber: "EGHU1234567", checkDigitValid: true, emptyFlag: true, getInOutStatus: GetInOutStatus.GETIN, sizeType: "40HC", manifestRef: "MNF-001", billOfLading: "BL-EGL-001" },
+      { containerNumber: "EGHU8888888", checkDigitValid: false, emptyFlag: true, getInOutStatus: GetInOutStatus.GETIN, sizeType: "20DC", notes: "Sai check digit", billOfLading: "BL-EGL-001" }
     ],
     validationErrors: ["Container EGHU8888888 sai định dạng Check Digit"],
     status: RegistrationStatus.INVALID,
@@ -22,7 +22,7 @@ export const MOCK_REGISTRATIONS: ContainerRegistration[] = [
     submitter: { name: "Logistics Saigon JBL", role: "Đại lý" },
     registrationType: RegistrationType.TXTN,
     containers: [
-      { containerNumber: "TCNU1234560", checkDigitValid: true, emptyFlag: false, getInOutStatus: GetInOutStatus.GETOUT, sizeType: "40HC", manifestRef: "MNF-002" }
+      { containerNumber: "TCNU1234560", checkDigitValid: true, emptyFlag: false, getInOutStatus: GetInOutStatus.GETOUT, sizeType: "40HC", manifestRef: "MNF-002", billOfLading: "BL-SGN-999" }
     ],
     validationErrors: [],
     status: RegistrationStatus.PENDING,
@@ -37,20 +37,31 @@ export const MOCK_REGISTRATIONS: ContainerRegistration[] = [
     submitter: { name: "CMA CGM Vietnam", role: "Hãng tàu" },
     registrationType: RegistrationType.TNTX,
     containers: [
-      { containerNumber: "CMAU1239875", checkDigitValid: true, emptyFlag: true, getInOutStatus: GetInOutStatus.GETIN, sizeType: "20DC" },
-       { containerNumber: "CMAU5554442", checkDigitValid: true, emptyFlag: true, getInOutStatus: GetInOutStatus.GETIN, sizeType: "40HC" }
+      { containerNumber: "CMAU1239875", checkDigitValid: true, emptyFlag: true, getInOutStatus: GetInOutStatus.GETIN, sizeType: "20DC", billOfLading: "BL-CMA-777" },
+       { containerNumber: "CMAU5554442", checkDigitValid: true, emptyFlag: true, getInOutStatus: GetInOutStatus.GETIN, sizeType: "40HC", billOfLading: "BL-CMA-777" }
     ],
     validationErrors: [],
     status: RegistrationStatus.CONFIRMED,
     assignedOfficer: "Nguyễn Văn A",
     auditTrail: [],
-    manifestSummary: { totalMatched: 2, totalMismatch: 0, manifestId: "MNF-003" }
+    manifestSummary: { totalMatched: 2, totalMismatch: 0, manifestId: "MNF-003" },
+    // MOCK REQUEST: Extension Request (Gia hạn)
+    activeRequests: [
+      {
+        requestId: "REQ-EXT-001",
+        type: RequestType.EXTENSION,
+        createdDate: "2023-10-27T08:00:00Z",
+        reason: "Tàu bị delay do bão, xin gia hạn lưu bãi thêm 15 ngày.",
+        status: RequestStatus.PENDING,
+        attachedDocuments: ["don_xin_gia_han.pdf", "thong_bao_tau.pdf"]
+      }
+    ]
   }
 ];
 
 export const MOCK_MANIFESTS: Record<string, ManifestRecord[]> = {
   "MNF-002": [
-    { manifestId: "MNF-002", containerNumber: "TCNU1234560", isEmpty: true, billOfLading: "BL-001", weight: 3500 }
+    { manifestId: "MNF-002", containerNumber: "TCNU1234560", isEmpty: true, billOfLading: "BL-SGN-999", weight: 3500 }
   ]
 };
 
